@@ -10,6 +10,8 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
+  attributeBindings: ['disabledOrUndefined:disabled'],
+  
   slider:       null,
   start:        undefined,
   step:         undefined,
@@ -19,6 +21,7 @@ export default Ember.Component.extend({
   animate:      true,
   snap:         false,
   connect:      false,
+  disabled:     false,
   orientation:  'horizontal',
   direction:    'ltr',
   behaviour:    'tap',
@@ -107,6 +110,12 @@ export default Ember.Component.extend({
     if (slider) {
       var val = this.get('start');
       slider.set(val);
+    }
+  }),
+  
+  disabledOrUndefined: Ember.computed('disabled', function() {
+    if (this.get('disabled')) {
+      return true;
     }
   }),
 
